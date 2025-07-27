@@ -1,0 +1,77 @@
+
+const utils = preload("res://scripts/lib/utils.gd")
+
+# Entry Point
+
+static func run():
+    set_project()
+
+# Project Setting
+
+static func set_project():
+    set_window_size()
+    create_input_mapping()
+
+static func set_window_size():
+    var width_path = "display/window/size/viewport_width"
+    var width = 1152 * 2
+    utils.set_project_setting(width_path, width)
+    
+    var height_path = "display/window/size/viewport_height"
+    var height = 648 * 2
+    utils.set_project_setting(height_path, height)
+
+static func create_input_mapping():
+    # needs editor restart to be visible in the editor
+    create_input_turn_left()
+    create_input_turn_right()
+    create_input_thrust()
+
+static func create_input_turn_left():
+    var path = "input/turn_left"
+
+    var input = {}
+    input.deadzone = 0.2
+
+    var arrow_key = InputEventKey.new()
+    arrow_key.set_physical_keycode(KEY_LEFT)
+
+    var char_key = InputEventKey.new()
+    char_key.set_physical_keycode(KEY_A)
+
+    input.events = [arrow_key, char_key]
+
+    utils.set_project_setting(path, input)
+
+static func create_input_turn_right():
+    var path = "input/turn_right"
+
+    var input = {}
+    input.deadzone = 0.2
+
+    var arrow_key = InputEventKey.new()
+    arrow_key.set_physical_keycode(KEY_RIGHT)
+
+    var char_key = InputEventKey.new()
+    char_key.set_physical_keycode(KEY_D)
+
+    input.events = [arrow_key, char_key]
+
+    utils.set_project_setting(path, input)
+
+static func create_input_thrust():
+    var path = "input/thrust"
+
+    var input = {}
+    input.deadzone = 0.2
+
+    var arrow_key = InputEventKey.new()
+    arrow_key.set_physical_keycode(KEY_UP)
+
+    var char_key = InputEventKey.new()
+    char_key.set_physical_keycode(KEY_W)
+
+    input.events = [arrow_key, char_key]
+
+    utils.set_project_setting(path, input)
+
