@@ -38,3 +38,17 @@ static func create_scene_from_node(root_node, scene_name):
 static func load_scene(path):
     return load(path).instantiate()
 
+# add a child node to a parent
+static func add_child(parent, child):
+    parent.add_child(child)
+
+    var owner = parent.get_owner()
+    if owner:
+        child.set_owner(owner)
+    else:
+        child.set_owner(parent)
+
+# add a node to a scene
+static func add_to_scene(root, parent, child):
+    parent.add_child(child)
+    child.set_owner(root)

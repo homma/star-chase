@@ -30,8 +30,7 @@ static func create_main_scene():
     # stage node
     var stage_path = create_stage_scene()
     var stage = utils.load_scene(stage_path)
-    root.add_child(stage)
-    stage.set_owner(root)
+    utils.add_child(root, stage)
 
     # ship node
     var ship_path = create_ship_scene()
@@ -39,8 +38,7 @@ static func create_main_scene():
 
     ship.set_position(stage_size / 2)
 
-    root.add_child(ship)
-    ship.set_owner(root)
+    utils.add_child(root, ship)
 
     return utils.create_scene_from_node(root, "root")
 
@@ -57,8 +55,7 @@ static func create_stage_scene():
     bg.set_color(Color.BLACK)
     bg.set_size(stage_size)
     ## bg.set_anchors_preset(Control.LayoutPreset.PRESET_FULL_RECT)
-    stage.add_child(bg)
-    bg.set_owner(stage)
+    utils.add_child(stage, bg)
 
     # particles
     var stars = utils.create_node("GPUParticles2D")
@@ -80,8 +77,7 @@ static func create_stage_scene():
     material.set_param_max(ParticleProcessMaterial.Parameter.PARAM_SCALE, 5)
     stars.set_process_material(material)
 
-    stage.add_child(stars)
-    stars.set_owner(stage)
+    utils.add_child(stage, stars)
 
     # add edges of the stage
 
@@ -101,19 +97,16 @@ static func create_ship_scene():
 
     # add camera
     var camera = utils.create_node("Camera2D")
-    ship.add_child(camera)
-    camera.set_owner(ship)
+    utils.add_child(ship, camera)
 
     # add ship polygon
     var poly = create_ship_polygon()
-    ship.add_child(poly)
-    poly.set_owner(ship)
+    utils.add_child(ship, poly)
 
     # add collision shape
     var col = utils.create_node("CollisionPolygon2D")
     col.set_polygon(poly.get_polygon())
-    ship.add_child(col)
-    col.set_owner(ship)
+    utils.add_child(ship, col)
 
     return utils.create_scene_from_node(ship, "ship")
 
