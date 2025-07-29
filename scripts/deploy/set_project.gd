@@ -39,7 +39,11 @@ static func create_input_turn_left():
     var char_key = InputEventKey.new()
     char_key.set_physical_keycode(KEY_A)
 
-    input.events = [arrow_key, char_key]
+    var stick = InputEventJoypadMotion.new()
+    stick.set_axis(0)
+    stick.set_axis_value(-1)
+
+    input.events = [arrow_key, char_key, stick]
 
     utils.set_project_setting(path, input)
 
@@ -55,7 +59,11 @@ static func create_input_turn_right():
     var char_key = InputEventKey.new()
     char_key.set_physical_keycode(KEY_D)
 
-    input.events = [arrow_key, char_key]
+    var stick = InputEventJoypadMotion.new()
+    stick.set_axis(0)
+    stick.set_axis_value(1)
+
+    input.events = [arrow_key, char_key, stick]
 
     utils.set_project_setting(path, input)
 
@@ -71,7 +79,10 @@ static func create_input_thrust():
     var char_key = InputEventKey.new()
     char_key.set_physical_keycode(KEY_W)
 
-    input.events = [arrow_key, char_key]
+    var button = InputEventJoypadButton.new()
+    button.set_button_index(JoyButton.JOY_BUTTON_A)
+
+    input.events = [arrow_key, char_key, button]
 
     utils.set_project_setting(path, input)
 
