@@ -5,6 +5,8 @@ const config = preload("res://scripts/config.gd")
 var k_thrust = config.thrust
 var k_torque = config.torque
 
+var stage_size = config.stage_size
+
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
     var turn = Input.get_axis("turn_left", "turn_right")
@@ -18,3 +20,14 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
     state.apply_force(force)
     state.apply_torque(torque)
+
+    # jump to the other side when it crosses the stage border
+    var viewport_size = get_viewport_rect().size
+
+    var min_x = viewport_size.x / 2
+    var max_x = stage_size.x - viewport_size.x / 2
+    position.x = wrapf(position.x, min_x, max_x)
+
+    var min_y = viewport_size.y / 2
+    var max_y = stage_size.y - viewport_size.y / 2
+    position.y = wrapf(position.y, min_y, max_y)
