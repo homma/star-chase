@@ -1,7 +1,6 @@
 
 const utils = preload("res://scripts/lib/utils.gd")
-
-const stage_size = Vector2(20000, 20000)
+const config = preload("res://scripts/config.gd")
 
 # Entry Point
 
@@ -21,6 +20,7 @@ static func get_viewport_size() -> Vector2:
     return Vector2(w, h)
 
 static func create_main_scene():
+    var stage_size = config.stage_size
 
     # root node
     var root = utils.create_node("Node2D")
@@ -43,6 +43,7 @@ static func create_main_scene():
     return utils.create_scene_from_node(root, "root")
 
 static func create_stage_scene():
+    var stage_size = config.stage_size
 
     # root node
     var stage = utils.create_node("Node2D")
@@ -71,7 +72,7 @@ static func create_stage_scene():
     var material = ParticleProcessMaterial.new()
     var shape = ParticleProcessMaterial.EmissionShape.EMISSION_SHAPE_BOX
     material.set_emission_shape(shape)
-    material.set_emission_box_extents(Vector3(20000, 20000, 1))
+    material.set_emission_box_extents(Vector3(stage_size.x, stage_size.y, 1))
     material.set_gravity(Vector3.ZERO)
     material.set_param_min(ParticleProcessMaterial.Parameter.PARAM_SCALE, 2)
     material.set_param_max(ParticleProcessMaterial.Parameter.PARAM_SCALE, 5)

@@ -1,7 +1,9 @@
 extends RigidBody2D
 
-const k_thrust = 3000.0
-const k_torque = 2000.0
+const config = preload("res://scripts/config.gd")
+
+var k_thrust = config.thrust
+var k_torque = config.torque
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
