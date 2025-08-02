@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 const config = preload("res://scripts/config.gd")
+const global = preload("res://scripts/global.gd")
 
 var k_thrust = config.thrust
 var k_torque = config.torque
@@ -31,3 +32,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
     var min_y = viewport_size.y / 2
     var max_y = stage_size.y - viewport_size.y / 2
     position.y = wrapf(position.y, min_y, max_y)
+
+    # update global state
+    global.ship_position = position

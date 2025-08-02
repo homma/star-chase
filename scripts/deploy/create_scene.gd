@@ -40,6 +40,11 @@ static func create_main_scene():
 
     utils.add_child(root, ship)
 
+    # HUD node
+    var hud_path = create_hud_scene()
+    var hud = utils.load_scene(hud_path)
+    utils.add_child(root, hud)
+
     return utils.create_scene_from_node(root, "root")
 
 static func create_stage_scene():
@@ -55,14 +60,13 @@ static func create_stage_scene():
     bg.set_name("background")
     bg.set_color(Color.BLACK)
     bg.set_size(stage_size)
-    ## bg.set_anchors_preset(Control.LayoutPreset.PRESET_FULL_RECT)
     utils.add_child(stage, bg)
 
     # particles
     var stars = utils.create_node("GPUParticles2D")
     stars.set_name("stars")
 
-    stars.set_amount(20000)
+    stars.set_amount(config.stage_size.x)
     stars.set_lifetime(30)
 
     var rect = Rect2(0, 0, stage_size.x, stage_size.y)
@@ -122,3 +126,49 @@ static func create_ship_polygon():
     poly.set_name("ship")
 
     return poly
+
+static func create_hud_scene():
+
+    # root node
+    var layer = utils.create_node("CanvasLayer")
+    layer.set_name("HUD")
+    layer.show()
+
+    # minimap
+    var minimap_path = create_minimap_scene()
+    var minimap = utils.load_scene(minimap_path)
+    utils.add_child(layer, minimap)
+
+    return utils.create_scene_from_node(layer, "HUD")
+
+static func create_minimap_scene():
+    var x = config.minimap_x
+    var y = config.minimap_y
+    var width = config.minimap_width
+    var height = config.minimap_height
+
+    # root
+    var minimap = utils.create_node("Node2D")
+    minimap.set_name("minimap")
+    minimap.set_position(Vector2(x, y))
+    minimap.set_script(load("res://scripts/minimap.gd"))
+    minimap.show()
+
+    # background
+    var bg = utils.create_node("ColorRect")
+    bg.set_name("background")
+    bg.set_color(Color.BLACK)
+    bg.set_size(Vector2(width, height))
+    utils.add_child(minimap, bg)
+
+    # border
+    var border = utils.create_rectangle_lines(0, 0, width, height, 2, Color.WHITE)
+    border.set_name("border")
+    utils.add_child(minimap, border)
+
+    # ship
+    var ship = utils.create_rectangle(0, 0, 8, 8, Color.LIGHT_SKY_BLUE)
+    ship.set_name("ship")
+    utils.add_child(minimap, ship)
+
+    return utils.create_scene_from_node(minimap, "minimap")

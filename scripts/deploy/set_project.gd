@@ -1,5 +1,6 @@
 
 const utils = preload("res://scripts/lib/utils.gd")
+const config = preload("res://scripts/config.gd")
 
 # Entry Point
 
@@ -14,11 +15,11 @@ static func set_project():
 
 static func set_window_size():
     var width_path = "display/window/size/viewport_width"
-    var width = 1152 * 2
+    var width = config.viewport_width
     utils.set_project_setting(width_path, width)
     
     var height_path = "display/window/size/viewport_height"
-    var height = 648 * 2
+    var height = config.viewport_height
     utils.set_project_setting(height_path, height)
 
 static func create_input_mapping():
