@@ -14,6 +14,8 @@ func move_to_random_position():
     position = Vector2(x, y)
     global.star_position = position
 
+    wrap_stage_border()
+
 func _ready():
     move_to_random_position()
     body_entered.connect(_on_body_entered)
@@ -23,8 +25,11 @@ func _on_body_entered(body):
         move_to_random_position()
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
+    wrap_stage_border()
 
+func wrap_stage_border():
     # jump to the other side when it crosses the stage border
+
     var viewport_size = get_viewport_rect().size
 
     var min_x = viewport_size.x / 2
