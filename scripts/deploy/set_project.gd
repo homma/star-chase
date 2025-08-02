@@ -11,6 +11,7 @@ static func run():
 
 static func set_project():
     set_project_info()
+    set_main_scene()
     set_window_size()
     create_input_mapping()
 
@@ -22,6 +23,11 @@ static func set_project_info():
     var desc_path = "application/config/description"
     var description = config.project_description
     utils.set_project_setting(desc_path, description)
+
+static func set_main_scene():
+    var path = "application/run/main_scene"
+    var scene = "root.tscn"
+    utils.set_project_setting(path, scene)
 
 static func set_window_size():
     var width_path = "display/window/size/viewport_width"
