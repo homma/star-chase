@@ -51,7 +51,7 @@ static func create_input_turn_left():
     char_key.set_physical_keycode(KEY_A)
 
     var stick = InputEventJoypadMotion.new()
-    stick.set_axis(0)
+    stick.set_axis(JoyAxis.JOY_AXIS_LEFT_X)
     stick.set_axis_value(-1)
 
     input.events = [arrow_key, char_key, stick]
@@ -71,7 +71,7 @@ static func create_input_turn_right():
     char_key.set_physical_keycode(KEY_D)
 
     var stick = InputEventJoypadMotion.new()
-    stick.set_axis(0)
+    stick.set_axis(JoyAxis.JOY_AXIS_LEFT_X)
     stick.set_axis_value(1)
 
     input.events = [arrow_key, char_key, stick]
