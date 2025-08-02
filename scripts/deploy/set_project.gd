@@ -10,8 +10,14 @@ static func run():
 # Project Setting
 
 static func set_project():
+    set_project_name()
     set_window_size()
     create_input_mapping()
+
+static func set_project_name():
+    var path = "application/config/name"
+    var name = config.project_name
+    utils.set_project_setting(path, name)
 
 static func set_window_size():
     var width_path = "display/window/size/viewport_width"

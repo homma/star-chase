@@ -1,5 +1,9 @@
 @tool
 
+# project
+
+static var project_name: String = "spaceship"
+
 # viewport
 
 static var viewport_width: float = 1152 * 2
