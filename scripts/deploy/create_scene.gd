@@ -113,16 +113,12 @@ static func create_ship_scene():
 
 static func create_ship_polygon():
 
-    var poly = utils.create_node("Polygon2D")
+    var p0 = Vector2(0, -30)
+    var p1 = Vector2(-15, 30)
+    var p2 = Vector2(15, 30)
+    var color = Color.BLUE
+    var poly = utils.create_triangle(p0, p1, p2, color)
 
     poly.set_name("ship")
-    poly.set_color(Color.BLUE)
-
-    # create a shape
-    var pt0 = Vector2(0, -30)
-    var pt1 = Vector2(-15, 30)
-    var pt2 = Vector2(15, 30)
-    var arr = PackedVector2Array([pt0, pt1, pt2])
-    poly.set_polygon(arr)
 
     return poly
