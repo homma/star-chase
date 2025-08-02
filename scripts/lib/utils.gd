@@ -115,3 +115,52 @@ static func create_triangle_lines(p0: Vector2, p1: Vector2, p2: Vector2, thickne
     tri.set_points(points)
 
     return tri
+
+## circle
+
+static func create_circle(x: float, y: float, radius: float, divide: int, color: Color) -> Polygon2D:
+    var circle = create_node("Polygon2D")
+
+    circle.set_color(color)
+
+    if divide < 3:
+        divide = 3
+
+    var arr = []
+    for i in range(divide):
+        var theta = deg_to_rad(360 / divide) * i
+        var cx = x + cos(theta) * radius
+        var cy = y + sin(theta) * radius
+        arr.push_back(Vector2(cx, cy))
+
+    var points = PackedVector2Array(arr)
+
+    circle.set_polygon(points)
+
+    return circle
+
+static func create_circle_lines(x: float, y: float, radius: float, divide: int, thickness: float, color: Color) -> Line2D:
+    var circle = create_node("Line2D")
+
+    circle.set_closed(true)
+    # circle.set_sharp_limit(100)
+    circle.set_default_color(color)
+    circle.set_width(thickness)
+
+    if divide < 3:
+        divide = 3
+
+    var arr = []
+    for i in range(divide):
+        var theta = deg_to_rad(360 / divide) * i
+        var cx = x + cos(theta) * radius
+        var cy = y + sin(theta) * radius
+        arr.push_back(Vector2(cx, cy))
+
+    var points = PackedVector2Array(arr)
+
+    circle.set_points(points)
+
+    return circle
+
+## capsule
