@@ -10,14 +10,18 @@ static func run():
 # Project Setting
 
 static func set_project():
-    set_project_name()
+    set_project_info()
     set_window_size()
     create_input_mapping()
 
-static func set_project_name():
-    var path = "application/config/name"
+static func set_project_info():
+    var name_path = "application/config/name"
     var name = config.project_name
-    utils.set_project_setting(path, name)
+    utils.set_project_setting(name_path, name)
+
+    var desc_path = "application/config/description"
+    var description = config.project_description
+    utils.set_project_setting(desc_path, description)
 
 static func set_window_size():
     var width_path = "display/window/size/viewport_width"
@@ -92,4 +96,3 @@ static func create_input_thrust():
     input.events = [arrow_key, char_key, button]
 
     utils.set_project_setting(path, input)
-

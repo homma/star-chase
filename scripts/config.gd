@@ -3,6 +3,7 @@
 # project
 
 static var project_name: String = "spaceship"
+static var project_description: String = "a spaceship game"
 
 # viewport
 
