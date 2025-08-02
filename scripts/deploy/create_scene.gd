@@ -40,6 +40,14 @@ static func create_main_scene():
 
     utils.add_child(root, ship)
 
+    # star node
+    var star_path = create_star_scene()
+    var star = utils.load_scene(star_path)
+
+    star.set_position(Vector2(0, 0))
+
+    utils.add_child(root, star)
+
     # HUD node
     var hud_path = create_hud_scene()
     var hud = utils.load_scene(hud_path)
@@ -94,6 +102,8 @@ static func create_ship_scene():
     var ship = utils.create_node("RigidBody2D")
     ship.set_name("ship")
     ship.set_can_sleep(false)
+    ship.set_contact_monitor(true)
+    ship.set_max_contacts_reported(1)
     ship.set_gravity_scale(0.0)
     ship.set_angular_damp(2.0)
     ship.set_linear_damp(1.0)
@@ -124,6 +134,40 @@ static func create_ship_polygon():
     var poly = utils.create_triangle(p0, p1, p2, color)
 
     poly.set_name("ship")
+
+    return poly
+
+static func create_star_scene():
+
+    # root node
+    var star = utils.create_node("RigidBody2D")
+    star.set_name("star")
+    star.set_can_sleep(false)
+    star.set_contact_monitor(true)
+    star.set_max_contacts_reported(1)
+    star.set_gravity_scale(0.0)
+    star.set_angular_damp(2.0)
+    star.set_linear_damp(1.0)
+    star.set_script(load("res://scripts/star.gd"))
+    star.show()
+
+    # add star polygon
+    var poly = create_star_polygon()
+    utils.add_child(star, poly)
+
+    # add collision shape
+    var col = utils.create_node("CollisionPolygon2D")
+    col.set_polygon(poly.get_polygon())
+    utils.add_child(star, col)
+
+    return utils.create_scene_from_node(star, "star")
+
+static func create_star_polygon():
+
+    var color = Color.YELLOW
+    var poly = utils.create_circle(0, 0, 30, 30, color)
+
+    poly.set_name("star")
 
     return poly
 
@@ -170,5 +214,10 @@ static func create_minimap_scene():
     var ship = utils.create_rectangle(0, 0, 8, 8, Color.LIGHT_SKY_BLUE)
     ship.set_name("ship")
     utils.add_child(minimap, ship)
+
+    # star
+    var star = utils.create_rectangle(0, 0, 8, 8, Color.YELLOW)
+    star.set_name("star")
+    utils.add_child(minimap, star)
 
     return utils.create_scene_from_node(minimap, "minimap")

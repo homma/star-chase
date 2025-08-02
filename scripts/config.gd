@@ -8,6 +8,7 @@ static var project_name: String = "spaceship"
 
 static var viewport_width: float = 1152 * 2
 static var viewport_height: float = 648 * 2
+static var viewport_size: Vector2 = Vector2(viewport_width, viewport_height)
 
 # stage
 

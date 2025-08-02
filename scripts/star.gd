@@ -8,26 +8,21 @@ var k_torque = config.torque
 
 var stage_size = config.stage_size
 
-func _on_ready():
+func move_to_random_position():
+    var x = randf_range(0, stage_size.x)
+    var y = randf_range(0, stage_size.y)
+    position = Vector2(x, y)
+    global.star_position = position
+
+func _ready():
+    move_to_random_position()
     body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body):
-    print("ship: body_entered")
-    print(body.name)
+    if body.name == "ship":
+        move_to_random_position()
 
-func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
-
-    var turn = Input.get_axis("turn_left", "turn_right")
-    var thrust = Input.is_action_pressed("thrust")
-
-    var force = Vector2.ZERO
-    if thrust:
-        force = - transform.y * k_thrust
-
-    var torque = turn * k_torque
-
-    state.apply_force(force)
-    state.apply_torque(torque)
+func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 
     # jump to the other side when it crosses the stage border
     var viewport_size = get_viewport_rect().size
@@ -41,4 +36,4 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
     position.y = wrapf(position.y, min_y, max_y)
 
     # update global state
-    global.ship_position = position
+    global.star_position = position
