@@ -33,3 +33,13 @@ static var minimap_y: float = minimap_margin_top
 static var thrust: float = 3000
 static var dash_thrust: float = thrust * 2
 static var torque: float = 2000
+
+# star
+
+static var star_thrust: float = 2000
+static var star_torque: float = 3000
+
+## random walk
+
+static var target_area_width: float = 200
+static var target_area_height: float = 200
