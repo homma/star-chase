@@ -125,13 +125,15 @@ static func create_ship_scene():
 
     # forward line
     var length = config.viewport_size.length()
-    var forward_line_color = Color.LIGHT_BLUE
+    var forward_line_color = Color.BLUE
+    forward_line_color.a = 0.4
     var forward_line = utils.create_line(0, 0, 0, -length, 1, forward_line_color)
     utils.add_child(ship, forward_line)
 
     # star line
     var star_line_length = config.viewport_size.length()
-    var star_line_color = Color.LIGHT_YELLOW
+    var star_line_color = Color.YELLOW
+    star_line_color.a = 0.2
     var star_line = utils.create_line(0, 0, 0, -length, 1, star_line_color)
     star_line.set_script(load("res://scripts/star_line.gd"))
     utils.add_child(ship, star_line)
