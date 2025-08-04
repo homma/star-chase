@@ -59,6 +59,22 @@ static func add_to_scene(root, parent, child):
 
 # shapes
 
+## Line
+
+static func create_line(x0: float, y0: float, x1: float, y1: float, thickness, color):
+    var line = create_node("Line2D")
+
+    line.set_closed(false)
+    line.set_default_color(color)
+    line.set_width(thickness)
+
+    var p0 = Vector2(x0, y0)
+    var p1 = Vector2(x1, y1)
+    var points = PackedVector2Array([p0, p1])
+    line.set_points(points)
+
+    return line
+
 ## rectangle
 
 static func create_rectangle(x: float, y: float, width: float, height: float, color: Color) -> Polygon2D:

@@ -123,6 +123,19 @@ static func create_ship_scene():
     col.set_polygon(poly.get_polygon())
     utils.add_child(ship, col)
 
+    # forward line
+    var length = config.viewport_size.length()
+    var forward_line_color = Color.LIGHT_BLUE
+    var forward_line = utils.create_line(0, 0, 0, -length, 1, forward_line_color)
+    utils.add_child(ship, forward_line)
+
+    # star line
+    var star_line_length = config.viewport_size.length()
+    var star_line_color = Color.LIGHT_YELLOW
+    var star_line = utils.create_line(0, 0, 0, -length, 1, star_line_color)
+    star_line.set_script(load("res://scripts/star_line.gd"))
+    utils.add_child(ship, star_line)
+
     return utils.create_scene_from_node(ship, "ship")
 
 static func create_ship_polygon():
