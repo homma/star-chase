@@ -8,12 +8,12 @@ var k_torque = config.torque
 
 var stage_size = config.stage_size
 
-func _on_ready():
-    body_entered.connect(_on_body_entered)
-
-func _on_body_entered(body):
-    print("ship: body_entered")
-    print(body.name)
+# func _ready():
+#     body_entered.connect(_on_body_entered)
+# 
+# func _on_body_entered(body):
+#     print("ship: body_entered")
+#     print(body.name)
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
