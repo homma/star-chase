@@ -163,6 +163,7 @@ static func create_star_scene():
     star.set_angular_damp(2.0)
     star.set_linear_damp(1.0)
     star.set_script(load("res://scripts/star.gd"))
+    utils.connect_signal(star.body_entered, star, "_on_body_entered")
     star.show()
 
     # add star polygon

@@ -57,6 +57,19 @@ static func add_to_scene(root, parent, child):
     parent.add_child(child)
     child.set_owner(root)
 
+# Node
+
+static func connect_signal(sig: Signal, to: Object, handler: StringName) -> void:
+    # connect a signal to a handler
+    #
+    # this is intended to be used inside EditorScript
+    # for other cases, use Signal.connect()
+
+    # set CONNECT_PERSIST flag for EditorScript
+    var flag = ConnectFlags.CONNECT_PERSIST
+
+    sig.connect(Callable(to, handler), flag)
+
 # shapes
 
 ## Line

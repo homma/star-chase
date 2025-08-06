@@ -14,8 +14,6 @@ func move_to_random_position():
     wrap_stage_border()
 
 func _ready():
-    body_entered.connect(_on_body_entered)
-
     move_to_random_position()
     rw_init()
 
