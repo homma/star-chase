@@ -150,6 +150,9 @@ static func create_triangle_lines(p0: Vector2, p1: Vector2, p2: Vector2, thickne
 static func create_circle(x: float, y: float, radius: float, divide: int, color: Color) -> Polygon2D:
     var circle = create_node("Polygon2D")
 
+    x += radius
+    y += radius
+
     circle.set_color(color)
 
     if divide < 3:
@@ -170,6 +173,9 @@ static func create_circle(x: float, y: float, radius: float, divide: int, color:
 
 static func create_circle_lines(x: float, y: float, radius: float, divide: int, thickness: float, color: Color) -> Line2D:
     var circle = create_node("Line2D")
+
+    x += radius
+    y += radius
 
     circle.set_closed(true)
     # circle.set_sharp_limit(100)
