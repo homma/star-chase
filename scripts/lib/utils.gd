@@ -199,3 +199,126 @@ static func create_circle_lines(x: float, y: float, radius: float, divide: int, 
     return circle
 
 ## capsule
+
+static func create_capsule(x: float, y: float, radius: float, height: float, color: Color) -> Polygon2D:
+    var capsule = create_node("Polygon2D")
+
+    if radius > height / 2:
+        radius = height / 2
+
+    x += radius
+    y += radius
+
+    capsule.set_color(color)
+
+    const divide = 12
+
+    # center rect
+    var rect_height = height - (radius * 2)
+
+    # top half circle
+    var top = []
+    for i in range(divide):
+        var theta = PI + deg_to_rad(180.0 / divide) * i
+        var cx = x + cos(theta) * radius
+        var cy = y + sin(theta) * radius
+        top.push_back(Vector2(cx, cy))
+
+    # right
+    var right_top_x = x + radius
+    var right_top_y = y
+    var right_top = Vector2(right_top_x, right_top_y)
+
+    var right_bottom_x = x + radius
+    var right_bottom_y = y + rect_height
+    var right_bottom = Vector2(right_bottom_x, right_bottom_y)
+
+    var right = [right_top, right_bottom]
+
+    # bottom half circle
+    var bottom = []
+    for i in range(divide):
+        var theta = deg_to_rad(180.0 / divide) * i
+        var cx = x + cos(theta) * radius
+        var cy = y + rect_height + sin(theta) * radius
+        bottom.push_back(Vector2(cx, cy))
+
+    # left
+    var left_top_x = x - radius
+    var left_top_y = y
+    var left_top = Vector2(left_top_x, left_top_y)
+
+    var left_bottom_x = x - radius
+    var left_bottom_y = y + rect_height
+    var left_bottom = Vector2(left_bottom_x, left_bottom_y)
+
+    var left = [left_bottom, left_top]
+
+    var points = PackedVector2Array(top + right + bottom + left)
+
+    capsule.set_polygon(points)
+
+    return capsule
+
+static func create_capsule_lines(x: float, y: float, radius: float, height: float, thickness: float, color: Color) -> Line2D:
+    var capsule = create_node("Line2D")
+
+    capsule.set_closed(true)
+    # capsule.set_sharp_limit(100)
+    capsule.set_default_color(color)
+    capsule.set_width(thickness)
+
+    if radius > height / 2:
+        radius = height / 2
+
+    x += radius
+    y += radius
+
+    const divide = 12
+
+    # center rect
+    var rect_height = height - (radius * 2)
+
+    # top half circle
+    var top = []
+    for i in range(divide):
+        var theta = PI + deg_to_rad(180.0 / divide) * i
+        var cx = x + cos(theta) * radius
+        var cy = y + sin(theta) * radius
+        top.push_back(Vector2(cx, cy))
+
+    # right
+    var right_top_x = x + radius
+    var right_top_y = y
+    var right_top = Vector2(right_top_x, right_top_y)
+
+    var right_bottom_x = x + radius
+    var right_bottom_y = y + rect_height
+    var right_bottom = Vector2(right_bottom_x, right_bottom_y)
+
+    var right = [right_top, right_bottom]
+
+    # bottom half circle
+    var bottom = []
+    for i in range(divide):
+        var theta = deg_to_rad(180.0 / divide) * i
+        var cx = x + cos(theta) * radius
+        var cy = y + rect_height + sin(theta) * radius
+        bottom.push_back(Vector2(cx, cy))
+
+    # left
+    var left_top_x = x - radius
+    var left_top_y = y
+    var left_top = Vector2(left_top_x, left_top_y)
+
+    var left_bottom_x = x - radius
+    var left_bottom_y = y + rect_height
+    var left_bottom = Vector2(left_bottom_x, left_bottom_y)
+
+    var left = [left_bottom, left_top]
+
+    var points = PackedVector2Array(top + right + bottom + left)
+
+    capsule.set_points(points)
+
+    return capsule
