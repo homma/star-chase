@@ -160,7 +160,7 @@ static func create_circle(x: float, y: float, radius: float, divide: int, color:
 
     var arr = []
     for i in range(divide):
-        var theta = deg_to_rad(360 / divide) * i
+        var theta = deg_to_rad(360.0 / divide) * i
         var cx = x + cos(theta) * radius
         var cy = y + sin(theta) * radius
         arr.push_back(Vector2(cx, cy))
@@ -187,7 +187,7 @@ static func create_circle_lines(x: float, y: float, radius: float, divide: int, 
 
     var arr = []
     for i in range(divide):
-        var theta = deg_to_rad(360 / divide) * i
+        var theta = deg_to_rad(360.0 / divide) * i
         var cx = x + cos(theta) * radius
         var cy = y + sin(theta) * radius
         arr.push_back(Vector2(cx, cy))
