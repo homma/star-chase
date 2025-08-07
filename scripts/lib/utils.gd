@@ -74,7 +74,7 @@ static func connect_signal(sig: Signal, to: Object, handler: StringName) -> void
 
 ## Line
 
-static func create_line(x0: float, y0: float, x1: float, y1: float, thickness, color: Color):
+static func create_line(x0: float, y0: float, x1: float, y1: float, thickness, color: Color) -> Line2D:
     var line = create_node("Line2D")
 
     line.set_closed(false)
