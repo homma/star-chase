@@ -16,27 +16,20 @@ static func set_project():
     create_input_mapping()
 
 static func set_project_info():
-    var name_path = "application/config/name"
     var name = config.project_name
-    utils.set_project_setting(name_path, name)
+    utils.set_project_name(name)
 
-    var desc_path = "application/config/description"
     var description = config.project_description
-    utils.set_project_setting(desc_path, description)
+    utils.set_project_description(description)
 
 static func set_main_scene():
-    var path = "application/run/main_scene"
     var scene = "root.tscn"
-    utils.set_project_setting(path, scene)
+    utils.set_main_scene(scene)
 
 static func set_window_size():
-    var width_path = "display/window/size/viewport_width"
     var width = config.viewport_width
-    utils.set_project_setting(width_path, width)
-    
-    var height_path = "display/window/size/viewport_height"
     var height = config.viewport_height
-    utils.set_project_setting(height_path, height)
+    utils.set_viewport_size(width, height)
 
 static func create_input_mapping():
     # needs editor restart to be visible in the editor

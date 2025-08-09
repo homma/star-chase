@@ -10,6 +10,25 @@ static func set_project_setting(path, value):
     ProjectSettings.set_setting(path, value)
     ProjectSettings.save()
 
+static func set_project_name(name: String) -> void:
+    var name_path = "application/config/name"
+    set_project_setting(name_path, name)
+
+static func set_project_description(description: String) -> void:
+    var desc_path = "application/config/description"
+    set_project_setting(desc_path, description)
+
+static func set_main_scene(scene: String) -> void:
+    var path = "application/run/main_scene"
+    set_project_setting(path, scene)
+
+static func set_viewport_size(width: int, height: int) -> void:
+    var width_path = "display/window/size/viewport_width"
+    set_project_setting(width_path, width)
+
+    var height_path = "display/window/size/viewport_height"
+    set_project_setting(height_path, height)
+
 # scene
 
 ## create a node for a given class name
