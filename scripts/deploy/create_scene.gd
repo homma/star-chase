@@ -170,6 +170,10 @@ static func create_star_scene():
     var poly = create_star_polygon()
     utils.add_child(star, poly)
 
+    # add star tail polygon
+    var tail = create_star_tail()
+    utils.add_child(star, tail)
+
     # add collision shape
     var col = utils.create_node("CollisionPolygon2D")
     col.set_polygon(poly.get_polygon())
@@ -185,6 +189,18 @@ static func create_star_polygon():
     poly.set_name("star")
 
     return poly
+
+static func create_star_tail():
+
+    var p0 = Vector2(20, 30)
+    var p1 = Vector2(30, 80)
+    var p2 = Vector2(40, 30)
+    var color = Color.YELLOW
+    var tail = utils.create_triangle(p0, p1, p2, color)
+
+    tail.set_name("tail")
+
+    return tail
 
 static func create_hud_scene():
 
