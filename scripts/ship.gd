@@ -17,6 +17,7 @@ var stage_size = config.stage_size
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
+    var direction = Input.get_vector("look_left", "look_right", "look_up", "look_down")
     var turn = Input.get_axis("turn_left", "turn_right")
     var thrust = Input.is_action_pressed("thrust")
 
@@ -26,8 +27,12 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
     var torque = turn * k_torque
 
-    state.apply_force(force)
     state.apply_torque(torque)
+
+    if not direction.is_equal_approx(Vector2.ZERO):
+        rotation = direction.angle() + (PI / 2)
+
+    state.apply_force(force)
 
     wrap_stage_border()
 

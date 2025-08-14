@@ -33,9 +33,69 @@ static func set_window_size():
 
 static func create_input_mapping():
     # needs editor restart to be visible in the editor
+    create_input_look_left()
+    create_input_look_right()
+    create_input_look_up()
+    create_input_look_down()
     create_input_turn_left()
     create_input_turn_right()
     create_input_thrust()
+
+static func create_input_look_left():
+    var path = "input/look_left"
+
+    var input = {}
+    input.deadzone = 0.2
+
+    var stick = InputEventJoypadMotion.new()
+    stick.set_axis(JoyAxis.JOY_AXIS_LEFT_X)
+    stick.set_axis_value(-1)
+
+    input.events = [stick]
+
+    utils.set_project_setting(path, input)
+
+static func create_input_look_right():
+    var path = "input/look_right"
+
+    var input = {}
+    input.deadzone = 0.2
+
+    var stick = InputEventJoypadMotion.new()
+    stick.set_axis(JoyAxis.JOY_AXIS_LEFT_X)
+    stick.set_axis_value(1)
+
+    input.events = [stick]
+
+    utils.set_project_setting(path, input)
+
+static func create_input_look_up():
+    var path = "input/look_up"
+
+    var input = {}
+    input.deadzone = 0.2
+
+    var stick = InputEventJoypadMotion.new()
+    stick.set_axis(JoyAxis.JOY_AXIS_LEFT_Y)
+    stick.set_axis_value(-1)
+
+    input.events = [stick]
+
+    utils.set_project_setting(path, input)
+
+static func create_input_look_down():
+    var path = "input/look_down"
+
+    var input = {}
+    input.deadzone = 0.2
+
+    var stick = InputEventJoypadMotion.new()
+    stick.set_axis(JoyAxis.JOY_AXIS_LEFT_Y)
+    stick.set_axis_value(1)
+
+    input.events = [stick]
+
+    utils.set_project_setting(path, input)
 
 static func create_input_turn_left():
     var path = "input/turn_left"
@@ -49,11 +109,7 @@ static func create_input_turn_left():
     var char_key = InputEventKey.new()
     char_key.set_physical_keycode(KEY_A)
 
-    var stick = InputEventJoypadMotion.new()
-    stick.set_axis(JoyAxis.JOY_AXIS_LEFT_X)
-    stick.set_axis_value(-1)
-
-    input.events = [arrow_key, char_key, stick]
+    input.events = [arrow_key, char_key]
 
     utils.set_project_setting(path, input)
 
@@ -69,11 +125,7 @@ static func create_input_turn_right():
     var char_key = InputEventKey.new()
     char_key.set_physical_keycode(KEY_D)
 
-    var stick = InputEventJoypadMotion.new()
-    stick.set_axis(JoyAxis.JOY_AXIS_LEFT_X)
-    stick.set_axis_value(1)
-
-    input.events = [arrow_key, char_key, stick]
+    input.events = [arrow_key, char_key]
 
     utils.set_project_setting(path, input)
 
